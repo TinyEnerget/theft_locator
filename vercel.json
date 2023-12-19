@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "*.py",
+            "use": "@TinyEnerget/theft_locator"
+        }
+    ],
+    "routes": [
+        {
+            "src": "(.*)",
+            "dest": "main.py"
+        }
+    ]
+  }
