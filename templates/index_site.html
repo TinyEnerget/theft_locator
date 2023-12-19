@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обнаружение несанкционированного майнинга криптовалют</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  </head>
+<body>
+    <!-- Header Section -->
+    <header class="bg-dark text-white text-center p-4">
+        <h1>Обнаружение несанкционированного майнинга криптовалют</h1>
+    </header>
+
+    <!-- Instructions Section -->
+    <section id="instructions" class="container mt-5">
+        <h2>Инструкция по использованию:</h2>
+        <ol>
+            <li>Нажмите кнопку "Загрузить".</li>
+            <li>Выберите CSV или XLSX файл, содержащий данные об энергопотреблении.</li>
+            <li>Нажмите кнопку "Отправить".</li>
+        </ol>
+    </section>
+
+    <!-- Upload Form -->
+    <section id="upload-form" class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <h2>Загрузка данных об энергопотреблении</h2>
+            
+            <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+            
+              <div class="form-group">
+                <label for="file">Выберите файл:</label>
+                <input type="file" class="form-control-file" id="file" name="file" accept=".csv, .xlsx" required> 
+              </div>
+            
+              <button type="submit" class="btn btn-primary w-100">Отправить</button>
+            
+            </form>
+            
+          </div>
+        </div>
+      </section>
+
+    <!-- Result Section -->
+    
+    <section class="container mt-5">
+      <div class="row justify-content-center">
+          <div class="col-md-6">
+              <h2>Результат:</h2>
+           </div>
+      </div>
+    </section>
+
+    <section  class="container mt-5">
+      <div class="row justify-content-center">
+          <div id="result" class="col-md-6">
+             <!-- Result --> 
+           </div>
+      </div>
+    </section> 
+
+    <!-- Функция для загрузки файла -->
+    <script>
+      // Отправка файла на сервер 
+      async function uploadFile(file) {
+      
+      let formData = new FormData();
+      formData.append('file', file);
+    
+      let upload = await fetch('/upload', {
+        method: 'POST',
+        body: formData
+      });
+      let result = await upload.text();
+
+      let probability =`${'<h2>'} ${result} ${'</h2>'}`;
+      probability = probability.replace(/"/g, ''); 
+      document.getElementById("result").innerHTML  = probability;
+      
+      return result;
+    }
+    </script>
+    
+    <!-- Обработчик отправки формы -->
+    <script>
+     document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        let file = document.getElementById('file').files[0];
+
+        uploadFile(file); 
+          }) 
+      
+    </script>
+    
+</body >
+</html>
+

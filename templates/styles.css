@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+}
+ 
+header {
+    font-weight: bold;
+}
+ 
+#instructions {
+    text-align: center;
+}
+ 
+#upload-form {
+    background-color: #f7f7f7;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+ 
+#result {
+    display: none;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+ 
+#probability {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
